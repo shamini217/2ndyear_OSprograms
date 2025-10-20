@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <unistd.h> 
+#include <sys/wait.h>
+int main() {
+int pid = fork(); // Create a new process
+if (pid == 0) {
+// Child process
+printf("Child: Running 'ls' command...\n");
+execl("/bin/ls", "ls", NULL); 
+// Replace child with 'ls' program 
+printf("Child: exec failed\n"); 
+// This prints only if exec fails
+} else {
+// Parent process
+wait(NULL);
+// Wait for child to finish
+printf("Parent: Child process finished.\n");
+}
+return 0;
+}
