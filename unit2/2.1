@@ -1,0 +1,47 @@
+ #include<stdio.h>
+void waitingtime(int process[],int n,int bt[],int wt[]){
+wt[0]=0;
+int i; for(i=1;i<n;i++){
+wt[i]=bt[i-1]+wt[i-1];
+}
+}
+void turnaroundtime(int process[],int n,int bt[],int wt[],int tat[]){
+int i; for(i=0;i<n;i++){
+tat[i]=wt[i]+bt[i];
+}
+}
+void avgtime(int process[],int n,int bt[]){
+int wt[n],tat[n],twt=0,ttat=0; 
+waitingtime(process,n,bt,wt);
+turnaroundtime(process,n,bt,wt,tat);
+printf("Processes Burst Waiting Turnaround \n"); 
+int i;
+for(i=0;i<n;i++){ 
+twt=twt+wt[i];
+ 
+
+ttat=ttat+tat[i];
+printf("%d\t%d\t%d\t%d\n",i+1,bt[i],wt[i],tat[i]);
+}
+}
+int main(){
+ 
+float w=(float)twt/(float)n; 
+float t=(float)ttat/(float)n;
+printf("average waiting time = %f\n",w); 
+printf("average turn around time = %f\n",t);
+
+
+
+int i,n; scanf("%d",&n); 
+int process[n]; int bt[n];
+for(i=0;i<n;i++){
+scanf("%d",&process[i]);
+ 
+}
+for(i=0;i<n;i++){
+scanf("%d",&bt[i]);
+}
+}
+avgtime(process,n,bt);
+return 0;
